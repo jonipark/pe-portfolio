@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta property="og:title" content="Personal Portfolio" />
+    <meta property="og:description" content="My Personal Portfolio" />
+    <meta property="og:url" content="{{ url }}" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link lang="sass" rel="stylesheet" href="./static/styles/main.css" />
+    <title>{{ title }}</title>
+  </head>
+
+  <body>
+    <header>{% include "navbar.html" %}</header>
+
+    <!-- Work Experience -->
+    <div class="timeline">
+      <h2>Work Experience</h2>
+      {% for e in work_experiences %}
+      <h4 class="h4 timeline-item-title-work">
+        <a href="{{e.url}}" target="_blank">{{e.company}}</a> | {{e.date}}
+      </h4>
+      <p class="timeline-text">
+        {{e.title}}<br />
+        · {{e.desc}}
+      </p>
+      {% endfor %}
+    </div>
+
+    <!-- Education -->
+    <div class="timeline">
+      <h2>Education</h2>
+      {% for e in education %}
+      <h4 class="h4 timeline-item-title-edu">
+        <a href="{{e.url}}" target="_blank">{{e.school}}</a> | {{e.date}}
+      </h4>
+      <p class="timeline-text">
+        {{e.major}}, GPA: {{e.gpa}}<br />
+        · {{e.desc}}
+      </p>
+      {% endfor %}
+    </div>
+  </body>
+</html>

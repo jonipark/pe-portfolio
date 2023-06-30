@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta property="og:title" content="Personal Portfolio" />
+    <meta property="og:description" content="My Personal Portfolio" />
+    <meta property="og:url" content="{{ url }}" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link lang="sass" rel="stylesheet" href="./static/styles/main.css" />
+    <title>{{ title }}</title>
+  </head>
+
+  <body>
+    <header>{% include "navbar.html" %}</header>
+
+    <div class="profile">
+      <div id="profile-picture" class="profile-picture">
+        <img src="./static/img/profile-picture.jpg" />
+      </div>
+      <h1>{{ title }}</h1>
+    </div>
+
+    <!-- About Me -->
+    <div class="profile">
+      <h2>About Me</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc libero
+        justo, imperdiet et quam at, sodales tempor sapien. Nullam vitae odio
+        sollicitudin, placerat leo quis, feugiat purus.
+      </p>
+    </div>
+  </body>
+</html>
