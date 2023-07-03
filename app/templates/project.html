@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include "head.html" %}
+
+  <body>
+    <div style="display: flex; padding: 64px">
+      <div>{% include "sidebar.html" %}</div>
+      <div style="width: 100%">
+        {% include "navbar.html" %}
+
+        <article class="projects active">
+          <header>
+            <h2 class="h2 article-title">Projects</h2>
+          </header>
+
+          <section class="project">
+            <!-- TODO: Filter -->
+            <!-- <div class="select-list">
+              <a href="/projects/all" class="select-item">All</a>
+              <a href="/projects/web" class="select-item">Web</a>
+              <a href="/projects/game" class="select-item">Game</a>
+              <a href="/projects/android" class="select-item">Android</a>
+              <a href="/projects/ios" class="select-item">iOS</a>
+              <a href="/projects/macos" class="select-item">MacOS</a>
+              <a href="/projects/others" class="select-item">Others</a>
+            </div> -->
+
+            <!-- PROJECT LIST -->
+            <ul class="project-list">
+              {% for project in projects %}
+              <li class="project-item active">
+                <a target="_blank" href="{{ project.link }}">
+                  <figure class="project-img">
+                    <div class="project-item-icon-box">
+                      <ion-icon name="link-outline"></ion-icon>
+                    </div>
+                    <img
+                      src="{{ project.image }}"
+                      alt="{{ project.alt }}"
+                      loading="lazy"
+                    />
+                  </figure>
+                  <h3 class="project-title">{{ project.title }}</h3>
+                  <p class="project-skills">{{ project.skills }}</p>
+                  <p class="project-desc">{{ project.desc }}</p>
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </section>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>

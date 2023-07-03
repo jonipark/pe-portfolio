@@ -1,53 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta property="og:title" content="Personal Portfolio" />
-    <meta property="og:description" content="My Personal Portfolio" />
-    <meta property="og:url" content="{{ url }}" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link lang="sass" rel="stylesheet" href="./static/styles/main.css" />
-    <title>{{ title }}</title>
-  </head>
+  {% include "head.html" %}
 
   <body>
-    <header>{% include "navbar.html" %}</header>
+    <div style="display: flex; padding: 64px">
+      <div>{% include "sidebar.html" %}</div>
+      <div style="width: 100%">
+        {% include "navbar.html" %}
 
-    <!-- Work Experience -->
-    <div class="timeline">
-      <h2>Work Experience</h2>
-      {% for e in work_experiences %}
-      <h4 class="h4 timeline-item-title-work">
-        <a href="{{e.url}}" target="_blank">{{e.company}}</a> | {{e.date}}
-      </h4>
-      <p class="timeline-text">
-        {{e.title}}<br />
-        · {{e.desc}}
-      </p>
-      {% endfor %}
-    </div>
+        <article class="experience active">
+          <header>
+            <h2 class="h2 article-title">Experience</h2>
+          </header>
 
-    <!-- Education -->
-    <div class="timeline">
-      <h2>Education</h2>
-      {% for e in education %}
-      <h4 class="h4 timeline-item-title-edu">
-        <a href="{{e.url}}" target="_blank">{{e.school}}</a> | {{e.date}}
-      </h4>
-      <p class="timeline-text">
-        {{e.major}}, GPA: {{e.gpa}}<br />
-        · {{e.desc}}
-      </p>
-      {% endfor %}
+          <section class="timeline">
+            <div class="title-wrapper">
+              <div class="icon-box">
+                <ion-icon name="book-outline"></ion-icon>
+              </div>
+              <h3 class="h3">Work</h3>
+            </div>
+
+            <ol class="timeline-list">
+              {% for e in work_experiences %}
+              <li class="timeline-item">
+                <div class="timeline-work-container">
+                  <a href="{{e.url}}" target="_blank">
+                    <img
+                      src="{{'./static/img/company/logo-' + e.company +'.png'}}"
+                      alt="mobile app icon"
+                      width="24"
+                      style="margin-right: 6px; border-radius: 4px"
+                    />
+                  </a>
+                  <div class="timeline-work-text">
+                    <a href="https://www.outrider.ai/" target="_blank">
+                      <h4 class="h4 timeline-item-title">{{e.company}}</h4></a
+                    >
+                    <p class="timeline-item-position">{{e.title}}</p>
+                  </div>
+                </div>
+                <span>{{e.date}}</span>
+                <p class="timeline-text">{{e.desc}}</p>
+              </li>
+              {% endfor %}
+            </ol>
+          </section>
+
+          <section class="timeline">
+            <div class="title-wrapper">
+              <div class="icon-box">
+                <ion-icon name="book-outline"></ion-icon>
+              </div>
+              <h3 class="h3">Education</h3>
+            </div>
+
+            <ol class="timeline-list">
+              {% for e in education %}
+              <li class="timeline-item">
+                <a href="{{e.url}}" target="_blank">
+                  <h4 class="h4 timeline-item-title-edu">{{e.school}}</h4></a
+                >
+                <span>{{e.date}}</span>
+
+                <p class="timeline-text">{{e.desc}}</p>
+              </li>
+              {% endfor %}
+            </ol>
+          </section>
+        </article>
+      </div>
     </div>
   </body>
 </html>
