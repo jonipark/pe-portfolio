@@ -227,6 +227,7 @@ def experience():
     return render_template('experience.html', work_experiences=[
         {
             "company": "Outrider",
+            "logo": "./static/img/company/logo-outrider.png",
             "title": "Software Engineer, Cloud Applications Intern",
             "desc": "Automates yard operations for logistics hubs | React, TypeScript, Node.js, Jest, Cypress",
             "date": "June 2023 — Present",
@@ -234,6 +235,7 @@ def experience():
         },
         {
             "company": "Brex",
+            "logo": "./static/img/company/logo-brex.png",
             "title": "Software Engineer Intern",
             "desc": "Mobile Policy Validation | React Native, TypeScript, GraphQL<br />Enhanced budget carousel sorting logic | TypeScript<br />Globalized state property of addresses in internal tool | SQL, Retool",
             "date": "May 2022 — Aug 2022",
@@ -241,6 +243,7 @@ def experience():
         },
         {
             "company": "Ringle",
+            "logo": "./static/img/company/logo-ringle.png",
             "title": "Technical Product Manager Intern",
             "desc": "Slackbot metric tracking automation | Ruby, SQLite<br />Improved user retention with analytics coding and UX enhancements | JavaScript, SQL",
             "date": "Apr 2020 - Mar 2021",
