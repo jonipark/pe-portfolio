@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include "head.html" %}
+
+  <body>
+    <div style="display: flex; padding: 64px">
+      <div>{% include "sidebar.html" %}</div>
+
+      <div>
+        <div style="margin-left: 30px">
+          <h1 style="font-size: 1.5rem; margin-bottom: 30px; color: white">
+            {{ title }}
+          </h1>
+
+          <form id="new-post-form" style="margin-bottom: 50px">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                placeholder="Enter Name"
+                required
+                style="
+                  margin-bottom: 10px;
+                  padding: 6px;
+                  width: 400px;
+                  border: 1px white solid;
+                "
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="Enter Email"
+                required
+                style="
+                  margin-bottom: 10px;
+                  padding: 6px;
+                  width: 400px;
+                  border: 1px white solid;
+                "
+              />
+            </div>
+            <div class="form-group">
+              <textarea
+                class="form-control"
+                id="content"
+                name="content"
+                placeholder="Post Content"
+                rows="3"
+                required
+                style="
+                  margin-bottom: 16px;
+                  padding: 6px;
+                  width: 400px;
+                  border: 1px white solid;
+                "
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              style="
+                background-color: #007bff;
+                color: white;
+                padding: 8px 16px;
+                cursor: pointer;
+              "
+            >
+              Submit
+            </button>
+          </form>
+
+          <!-- Posts -->
+          <ul
+            id="posts-list"
+            style="list-style-type: none; padding-left: 0; color: white"
+          ></ul>
+        </div>
+      </div>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+          fetchPosts();
+
+          document
+            .getElementById("new-post-form")
+            .addEventListener("submit", function (e) {
+              let name = document.getElementById("name").value;
+              let email = document.getElementById("email").value;
+              let content = document.getElementById("content").value;
+
+              // /api/timeline_post
+              fetch("/api/timeline_post", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: `name=${encodeURIComponent(
+                  name
+                )}&email=${encodeURIComponent(
+                  email
+                )}&content=${encodeURIComponent(content)}`,
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  // Add new post to the top of the list
+                  document
+                    .getElementById("posts-list")
+                    .insertAdjacentHTML(
+                      "afterbegin",
+                      `<li class="list-group-item"><h5>${data.name} - ${data.email}</h5><p>${data.content}</p></li>`
+                    );
+
+                  document.getElementById("new-post-form").reset();
+                });
+            });
+        });
+
+        function fetchPosts() {
+          fetch("/api/timeline_post")
+            .then((response) => response.json())
+            .then((data) => {
+              data.timeline_posts.forEach((post) => {
+                document.getElementById("posts-list").insertAdjacentHTML(
+                  "beforeend",
+                  `<li style="border: 1px solid grey; margin-bottom: 10px; padding: 15px;">
+                        <h5 style="color: grey; margin-bottom: 10px;">${post.name} | ${post.email}</h5>
+                        <p styple="color: white">${post.content}</p>
+                    </li>`
+                );
+              });
+            });
+        }
+      </script>
+    </div>
+  </body>
+</html>
