@@ -2,7 +2,7 @@
 
 cd ~/pe-portfolio
 
-tmux kill-server
+tmux kill-session -t pe-portfolio
 
 git fetch && git reset origin/main --hard
 
