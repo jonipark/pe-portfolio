@@ -41,7 +41,7 @@
                   </div>
                 </div>
                 <span>{{e.date}}</span>
-                <p class="timeline-text">{{e.desc}}</p>
+                <p class="timeline-text">{{e.desc|safe}}</p>
               </li>
               {% endfor %}
             </ol>
@@ -63,7 +63,7 @@
                 >
                 <span>{{e.date}}</span>
 
-                <p class="timeline-text">{{e.desc}}</p>
+                <p class="timeline-text">{{e.desc|safe}}</p>
               </li>
               {% endfor %}
             </ol>

@@ -24,7 +24,7 @@ mydb.create_tables([TimelinePost])
 
 @app.route('/')
 def index():
-    return render_template('index.html', title="Prairie Dogs - Nimra & Joni", url=os.getenv("URL"))
+    return render_template('index.html', title="MLH: Joni Portfolio", url=os.getenv("URL"))
 
 my_projects=[
     {
@@ -240,6 +240,7 @@ my_projects=[
 
 @app.route('/experience')
 def experience():
+    
     return render_template('experience.html', work_experiences=[
         {
             "company": "Outrider",
