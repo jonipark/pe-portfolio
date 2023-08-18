@@ -1,4 +1,4 @@
-import os
+import os, re
 from flask import Flask, render_template, request
 from dotenv import load_dotenv
 from peewee import *
@@ -8,7 +8,12 @@ from playhouse.shortcuts import model_to_dict
 load_dotenv()
 app = Flask(__name__)
 
-mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"), user=os.getenv("MYSQL_USER"), password=os.getenv("MYSQL_PASSWORD"), host=os.getenv("MYSQL_HOST"), port=3306)
+if os.getenv("TESTING") == 'true':
+    print("Running in test mode")
+    mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
+else:
+    mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"), user=os.getenv("MYSQL_USER"), password=os.getenv("MYSQL_PASSWORD"), host=os.getenv("MYSQL_HOST"), port=3306)
+
 print(mydb)
 
 class TimelinePost(Model):
@@ -309,11 +314,19 @@ def timeline():
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
     name = request.form['name']
+    if not name or name == "":
+        return "Invalid name", 400
+    
     email = request.form['email']
+    if not email or email == "" or not re.match(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b', email):
+        return "Invalid email", 400
+    
     content = request.form['content']
+    if not content or content == "":
+        return "Invalid content", 400
+    
     timeline_post = TimelinePost.create(name=name, email=email, content=content)
-
-    return model_to_dict(timeline_post)
+    return model_to_dict(timeline_post), 200
 
 @app.route('/api/timeline_post', methods=['GET'])
 def get_time_line_post():
