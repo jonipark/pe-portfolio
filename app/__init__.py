@@ -218,7 +218,7 @@ my_projects=[
         "category": "web",
         "link": "https://mohoho-info.web.app/",
         "image": "./static/img/projects/project-mohoho.png",
-        "alt": "Mohoho",
+        "alt": "Mohoho!s",
         "title": "Mohoho",
         "skills": "Html, CSS",
         "desc": "Informative website with essential links and info for Mount Holyoke College",
